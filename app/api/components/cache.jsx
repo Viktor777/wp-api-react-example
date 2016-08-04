@@ -16,13 +16,14 @@ export default (reducer, query) => WrappedComponent => {
         createRequest() {
             let params = this.props.params;
             let request = {};
+            let query = this.constructor.query;
 
             for (let key in query) {
                 if (query.hasOwnProperty(key)) {
                     if (this.constructor.isDynamicParam(key)) {
                         let param = query[key].slice(1);
 
-                        request[param] = params[param];
+                        request[key] = params[param];
                     } else {
                         request[key] = query[key];
                     }
