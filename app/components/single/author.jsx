@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
-import {entity} from '../../api';
+import {connectEntity} from '../../api';
 import {CardHeader} from 'material-ui/Card';
 
 class Single extends Component {
@@ -16,7 +16,7 @@ class Single extends Component {
                     <CardHeader
                         title={author.name}
                         subtitle={author.description}
-                        avatar={author.avatar_urls[48]}
+                        avatar={author.avatarUrls[48]}
                     >
                         <Link
                             to={author.link}
@@ -30,4 +30,4 @@ class Single extends Component {
     }
 }
 
-export default entity('users')(Single);
+export default connectEntity('users')(Single);

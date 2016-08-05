@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import hoistNonReactStatic from 'hoist-non-react-statics';
 import rest from '../rest';
 import cache from './cache';
+import modify from 'wp-api-response-modify';
 
 export default (reducer, query) => WrappedComponent => {
     class Entity extends Component {
@@ -64,7 +65,7 @@ export default (reducer, query) => WrappedComponent => {
             return (
                 <WrappedComponent
                     {...this.props}
-                    data={data}
+                    data={data ? modify(data) : data}
                     sync={sync}
                 />
             );

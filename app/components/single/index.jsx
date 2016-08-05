@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {entity} from '../../api';
+import {connectEntity} from '../../api';
 import {Card, CardActions, CardTitle, CardText} from 'material-ui/Card';
 import Categories from './categories';
 import Author from './author';
@@ -21,11 +21,11 @@ class Single extends Component {
                             }}
                         />
                         <CardTitle
-                            title={post.title.rendered}
+                            title={post.title}
                         />
                         <CardText
                             dangerouslySetInnerHTML={{
-                                __html: post.content.rendered
+                                __html: post.content
                             }}
                         />
                         <CardActions>
@@ -42,6 +42,6 @@ class Single extends Component {
     }
 }
 
-export default entity('posts', {
+export default connectEntity('posts', {
     slug: ':slug'
 })(Single);

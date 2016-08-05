@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
-import {collection} from '../../api';
+import {connectCollection} from '../../api';
 import FlatButton from 'material-ui/FlatButton';
 
 class Categories extends Component {
@@ -29,6 +29,6 @@ class Categories extends Component {
     }
 }
 
-export default collection('categories', {
+export default connectCollection('categories', {
     include: ':categories'
 })(Categories);

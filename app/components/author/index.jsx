@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {entity} from '../../api';
+import {connectEntity} from '../../api';
 import {List} from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
 import Avatar from 'material-ui/Avatar';
@@ -18,7 +18,7 @@ class Author extends Component {
                     <List>
                         <Subheader>
                             <Avatar
-                                src={author.avatar_urls[96]}
+                                src={author.avatarUrls[96]}
                                 size={96}
                             />
                             {author.name}
@@ -35,6 +35,6 @@ class Author extends Component {
     }
 }
 
-export default entity('users', {
+export default connectEntity('users', {
     slug: ':slug'
 })(Author);

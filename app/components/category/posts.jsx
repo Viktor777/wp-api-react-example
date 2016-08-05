@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
-import {collection} from '../../api';
+import {connectCollection} from '../../api';
 import {ListItem} from 'material-ui/List';
 
 class Posts extends Component {
@@ -13,9 +13,7 @@ class Posts extends Component {
         return (
             <div>
                 {sync ? posts.map(({
-                    title: {
-                        rendered: title
-                    },
+                    title,
                     link
                 }) => (
                     <ListItem
@@ -30,6 +28,6 @@ class Posts extends Component {
     }
 }
 
-export default collection('posts', {
+export default connectCollection('posts', {
     categories: ':category'
 })(Posts);
