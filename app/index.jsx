@@ -4,7 +4,8 @@ import {render} from 'react-dom';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import {Provider} from 'react-redux';
 import configure from './storage/configure';
-import {Router, Route, browserHistory} from 'react-router';
+import {Router, Route, browserHistory, IndexRoute} from 'react-router';
+import Main from './components/main';
 import Home from './components/home';
 import Category from './components/category';
 import Author from './components/author';
@@ -23,7 +24,8 @@ injectTapEventPlugin();
 render((
     <Provider store={configure(initial)}>
         <Router history={browserHistory}>
-            <Route path="/wp-api-react-example" component={Home}>
+            <Route path="/wp-api-react-example" component={Main}>
+                <IndexRoute component={Home} />
                 <Route path="/wp-api-react-example/category/:slug(/)" component={Category} />
                 <Route path="/wp-api-react-example/author/:slug(/)" component={Author} />
                 <Route path="/wp-api-react-example/:year/:month/:day/:slug(/)" component={Single} />

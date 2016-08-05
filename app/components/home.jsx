@@ -1,19 +1,33 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import {Link} from 'react-router';
+import {connectCollection} from '../api';
+import {List, ListItem} from 'material-ui/List';
 
-class Home extends Component {
+class Main extends Component {
     render() {
+        let {
+            data: categories,
+            sync
+        } = this.props;
+
         return (
-            <MuiThemeProvider>
-                {this.props.children}
-            </MuiThemeProvider>
+            <List>
+                {sync ? categories.map(({
+                    name,
+                    link
+                }) => (
+                    <ListItem
+                        primaryText={name}
+                        containerElement={<Link
+                            to={link}
+                        />}
+                    />
+                )) : 'Loading'}
+            </List>
         );
     }
 }
 
-export default connect(({
-
-}) => ({
-
-}))(Home);
+export default connectCollection('categories', {
+    per_page: 10
+})(Main);
