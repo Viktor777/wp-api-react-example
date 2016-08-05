@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
-import {model} from '../../api';
+import {entity} from '../../api';
 import {CardHeader} from 'material-ui/Card';
 
 class Single extends Component {
@@ -30,4 +30,4 @@ class Single extends Component {
     }
 }
 
-export default model('users')(Single);
+export default entity('users')(Single);

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {model} from '../../api';
+import {entity} from '../../api';
 import {List} from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
 import Posts from './posts';
@@ -28,6 +28,6 @@ class Category extends Component {
     }
 }
 
-export default model('categories', {
+export default entity('categories', {
     slug: ':slug'
 })(Category);

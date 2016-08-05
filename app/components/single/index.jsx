@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {model} from '../../api';
+import {entity} from '../../api';
 import {Card, CardActions, CardTitle, CardText} from 'material-ui/Card';
 import Categories from './categories';
 import Author from './author';
@@ -42,6 +42,6 @@ class Single extends Component {
     }
 }
 
-export default model('posts', {
+export default entity('posts', {
     slug: ':slug'
 })(Single);

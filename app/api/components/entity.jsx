@@ -5,7 +5,7 @@ import rest from '../rest';
 import cache from './cache';
 
 export default (reducer, query) => WrappedComponent => {
-    class Model extends Component {
+    class Entity extends Component {
         componentDidMount() {
             let {
                 cache: {
@@ -73,5 +73,5 @@ export default (reducer, query) => WrappedComponent => {
 
     return hoistNonReactStatic(connect(state => ({
         [reducer]: state[reducer]
-    }))(cache(reducer, query)(Model)), WrappedComponent);
+    }))(cache(reducer, query)(Entity)), WrappedComponent);
 };

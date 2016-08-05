@@ -39,6 +39,7 @@
     "redux-api": "^0.9.8",
     "redux-api-middleware": "^1.0.2",
     "redux-thunk": "^2.1.0",
-    "webfontloader": "^1.6.26"
+    "webfontloader": "^1.6.26",
+    "wp-api-response-modify": "^2.0.0"
   }
 }

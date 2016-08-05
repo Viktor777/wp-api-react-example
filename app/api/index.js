@@ -4,6 +4,5 @@ export let initialize = rest;
 export default () => rest().actions;
 export reducers from './storage/reducers';
 export cache from './storage/middlewares/cache';
-export wrapper from './components/wrapper';
-export model from './components/model';
+export entity from './components/entity';
 export collection from './components/collection';

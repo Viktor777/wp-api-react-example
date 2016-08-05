@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {model} from '../../api';
+import {entity} from '../../api';
 import {List} from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
 import Avatar from 'material-ui/Avatar';
@@ -35,6 +35,6 @@ class Author extends Component {
     }
 }
 
-export default model('users', {
+export default entity('users', {
     slug: ':slug'
 })(Author);
