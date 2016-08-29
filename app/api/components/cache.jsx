@@ -1,26 +1,21 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import hoistNonReactStatic from 'hoist-non-react-statics';
-import rest from '../rest';
+import isDynamicParam from '../utils/is-dynamic-param';
 
-export default (reducer, query) => WrappedComponent => {
+export default (reducer, query = {
+    id: ':id'
+}) => WrappedComponent => {
     class Cache extends Component {
-        static get query() {
-            return query ? Object.assign({}, query) : {
-                id: ':id'
-            };
-        }
-        static isDynamicParam(param) {
-            return Cache.query[param][0] === ':';
-        }
         createRequest() {
-            let params = this.props.params;
+            let {
+                params
+            } = this.props;
             let request = {};
-            let query = this.constructor.query;
 
             for (let key in query) {
                 if (query.hasOwnProperty(key)) {
-                    if (this.constructor.isDynamicParam(key)) {
+                    if (isDynamicParam(query, key)) {
                         let param = query[key].slice(1);
 
                         request[key] = params[param];
@@ -33,39 +28,14 @@ export default (reducer, query) => WrappedComponent => {
             return request;
         }
         find(params) {
-            let cache = this.props.cache;
-            let data = null;
-            let sync = false;
-            let query = this.constructor.query;
-
-            for (let key in query) {
-                if (query.hasOwnProperty(key) && this.constructor.isDynamicParam(key)) {
-                    let param = query[key].slice(1);
-
-                    if (params.hasOwnProperty(param) && cache[reducer] && cache[reducer][key]) {
-                        data = cache[reducer][key][params[param]];
-                        sync = !!data;
-
-                        return {
-                            data,
-                            sync
-                        };
-                    }
-                }
-            }
-
-            return {
-                data,
-                sync
-            };
-        }
-        findByRequest(params) {
-            let cache = this.props.cache;
+            let {
+                cache
+            } = this.props;
             let data = null;
             let sync = false;
 
-            if (cache[reducer] && cache[reducer].requests) {
-                data = cache[reducer].requests[window.JSON.stringify(params)];
+            if (cache[reducer]) {
+                data = cache[reducer][window.JSON.stringify(params)];
                 sync = !!data;
             }
 
@@ -74,26 +44,22 @@ export default (reducer, query) => WrappedComponent => {
                 sync
             };
         }
-        componentWillUnmount() {
-            this.props.dispatch(rest().actions[reducer].reset());
-
-            return this;
-        }
         render() {
             return (
                 <WrappedComponent
                     {...this.props}
                     cache={{
                         createRequest: this.createRequest.bind(this),
-                        find: this.find.bind(this),
-                        findByRequest: this.findByRequest.bind(this)
+                        find: this.find.bind(this)
                     }}
                 />
             );
         }
     }
 
-    return hoistNonReactStatic(connect(state => ({
-        cache: state.cache
+    return hoistNonReactStatic(connect(({
+        cache
+    }) => ({
+        cache
     }))(Cache), WrappedComponent);
 };

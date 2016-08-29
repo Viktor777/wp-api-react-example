@@ -28,13 +28,15 @@ class Single extends Component {
                                 __html: post.content
                             }}
                         />
-                        <CardActions>
-                            <Categories
-                                params={{
-                                    categories: post.categories
-                                }}
-                            />
-                        </CardActions>
+                        {post.categories.length && (
+                            <CardActions>
+                                <Categories
+                                    params={{
+                                        categories: post.categories
+                                    }}
+                                />
+                            </CardActions>
+                        )}
                     </Card>
                 ) : 'Loading'}
             </div>

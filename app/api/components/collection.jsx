@@ -2,23 +2,28 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import hoistNonReactStatic from 'hoist-non-react-statics';
 import rest from '../rest';
+import root from './root';
 import cache from './cache';
 import modify from 'wp-api-response-modify';
 
-export default (reducer, query) => WrappedComponent => {
+export default (reducer, query = {
+    id: ':id'
+}) => WrappedComponent => {
     class Collection extends Component {
         componentDidMount() {
             let {
                 cache: {
-                    findByRequest,
+                    find,
                     createRequest
                 },
                 dispatch
             } = this.props;
             let request = createRequest();
-            let cache = findByRequest(request);
+            let {
+                sync
+            } = find(request);
 
-            if (!cache.sync) {
+            if (!sync) {
                 dispatch(rest().actions[reducer](request));
             } else {
                 this.forceUpdate();
@@ -29,7 +34,7 @@ export default (reducer, query) => WrappedComponent => {
         render() {
             let {
                 cache: {
-                    findByRequest,
+                    find,
                     createRequest
                 },
                 [reducer]: {
@@ -39,8 +44,12 @@ export default (reducer, query) => WrappedComponent => {
                 params
             } = this.props;
 
+            if (data && !Array.isArray(data)) {
+                data = [data];
+            }
+
             if (!data.length && params) {
-                let cache = findByRequest(createRequest());
+                let cache = find(createRequest());
 
                 if (cache.data) {
                     data = Array.isArray(cache.data) ? cache.data : [cache.data];
@@ -60,5 +69,5 @@ export default (reducer, query) => WrappedComponent => {
 
     return hoistNonReactStatic(connect(state => ({
         [reducer]: state[reducer]
-    }))(cache(reducer, query)(Collection)), WrappedComponent);
+    }))(cache(reducer, query)(root(reducer)(Collection))), WrappedComponent);
 };

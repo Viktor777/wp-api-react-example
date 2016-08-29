@@ -1,0 +1,1 @@
+export default (query, param) => query[param][0] === ':';
