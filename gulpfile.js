@@ -19,7 +19,7 @@ let bundle = env => {
         debug: dev,
         cache: {},
         packageCache: {},
-        plugin: dev ? [watchify] : null
+        plugin: dev ? [watchify] : [collapse]
     }).transform(babelify, {
         presets: ['es2015', 'react'],
         plugins: ['transform-export-extensions']
@@ -28,8 +28,7 @@ let bundle = env => {
 
     if (!dev) {
         bundler = bundler
-            .transform(uglifyify)
-            .plugin(collapse);
+            .transform(uglifyify);
     }
     rebundle = () => {
         let result = bundler

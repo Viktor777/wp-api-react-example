@@ -23,13 +23,13 @@ class Single extends Component {
                         __html: post.content
                     }}
                 />
-                {post.categories.length && (
+                {post.categories.length ? (
                     <Categories
                         params={{
                             categories: post.categories
                         }}
                     />
-                )}
+                ) : null}
             </article>
         ) : (
             <span>Loading</span>
