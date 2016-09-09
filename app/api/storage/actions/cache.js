@@ -3,5 +3,6 @@ export let add = (reducer, request, response) => ({
     type: ADD,
     reducer,
     request,
-    response
+    response,
+    timestamp: Date.now()
 });

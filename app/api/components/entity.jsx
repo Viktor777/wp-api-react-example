@@ -25,7 +25,7 @@ export default (reducer, query = {
 
                     if (params.hasOwnProperty(param) && store[key]) {
                         data = store[key][params[param]];
-                        sync = !!data;
+                        sync = !!data && !rest().isExpired(reducer, data._timestamp);
 
                         return {
                             data,

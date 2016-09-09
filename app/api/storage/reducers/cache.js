@@ -5,7 +5,8 @@ export default (state = {}, {
     type,
     reducer,
     request,
-    response
+    response,
+    timestamp
 } = {
     type: null
 }) => {
@@ -22,7 +23,10 @@ export default (state = {}, {
             return update(state, {
                 [reducer]: {
                     $merge: {
-                        [request]: response
+                        [request]: {
+                            data: response,
+                            _timestamp: timestamp
+                        }
                     }
                 }
             });

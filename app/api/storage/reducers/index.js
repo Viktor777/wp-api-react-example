@@ -16,7 +16,8 @@ export default () => {
             reducers[reducer] = (state, action) => {
                 let {
                     type,
-                    item
+                    item,
+                    timestamp
                 } = action;
 
                 switch (type) {
@@ -36,11 +37,15 @@ export default () => {
                         state = update(state, params.reduce((params, param) => {
                             params[param] = {
                                 $merge: Array.isArray(item) ? item.reduce((items, current) => {
-                                    items[current[param]] = current;
+                                    items[current[param]] = Object.assign(current, {
+                                        _timestamp: timestamp
+                                    });
 
                                     return items;
                                 }, {}) : {
-                                    [item[param]]: item
+                                    [item[param]]: Object.assign(item, {
+                                        _timestamp: timestamp
+                                    })
                                 }
                             };
 

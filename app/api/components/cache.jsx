@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import hoistNonReactStatic from 'hoist-non-react-statics';
 import isDynamicParam from '../utils/is-dynamic-param';
+import rest from '../rest';
 
 export default (reducer, query = {
     id: ':id'
@@ -35,8 +36,12 @@ export default (reducer, query = {
             let sync = false;
 
             if (cache[reducer]) {
-                data = cache[reducer][window.JSON.stringify(params)];
-                sync = !!data;
+                let cached = cache[reducer][window.JSON.stringify(params)];
+
+                if (cached && cached.data) {
+                    data = cached.data;
+                    sync = !!data && !rest().isExpired(reducer, cached._timestamp);
+                }
             }
 
             return {

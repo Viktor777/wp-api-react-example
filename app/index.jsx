@@ -17,7 +17,10 @@ let initial = {};
 
 initialize({
     categories: '/wp-api-react-example/wp-json/wp/v2/categories/:id',
-    posts: '/wp-api-react-example/wp-json/wp/v2/posts/:id',
+    posts: {
+        url: '/wp-api-react-example/wp-json/wp/v2/posts/:id',
+        expiration: 5 * 60 // 5 min - for test
+    },
     users: '/wp-api-react-example/wp-json/wp/v2/users/:id'
 });
 injectTapEventPlugin();
