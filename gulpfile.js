@@ -27,7 +27,9 @@ let bundle = env => {
     let rebundle;
 
     if (!dev) {
-        bundler = bundler.transform(uglifyify);
+        bundler = bundler
+            .transform(uglifyify)
+            .plugin(collapse);
     }
     rebundle = () => {
         let result = bundler
@@ -39,8 +41,7 @@ let bundle = env => {
         if (!dev) {
             result = result
                 .pipe(stripDebug())
-                .pipe(uglify())
-                .plugin(collapse);
+                .pipe(uglify());
         }
 
         return result
