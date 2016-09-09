@@ -4,6 +4,7 @@ let gulp = require('gulp');
 let babelify = require('babelify');
 let browserify = require('browserify');
 let buffer = require('vinyl-buffer');
+let collapse = require('bundle-collapser/plugin');
 let source = require('vinyl-source-stream');
 let stripDebug = require('gulp-strip-debug');
 let uglify = require('gulp-uglify');
@@ -38,7 +39,8 @@ let bundle = env => {
         if (!dev) {
             result = result
                 .pipe(stripDebug())
-                .pipe(uglify());
+                .pipe(uglify())
+                .plugin(collapse);
         }
 
         return result

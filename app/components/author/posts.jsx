@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
 import {connectCollection} from '../../api';
-import {ListItem} from 'material-ui/List';
 
 class Posts extends Component {
     render() {
@@ -11,19 +10,20 @@ class Posts extends Component {
         } = this.props;
 
         return (
-            <div>
+            <ul>
                 {sync ? posts.map(({
                     title,
                     link
                 }) => (
-                    <ListItem
-                        primaryText={title}
-                        containerElement={<Link
+                    <li>
+                        <Link
                             to={link}
-                        />}
-                    />
-                )) : 'Loading'}
-            </div>
+                        >{title}</Link>
+                    </li>
+                )) : (
+                    <li>Loading</li>
+                )}
+            </ul>
         );
     }
 }

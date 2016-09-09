@@ -14,6 +14,8 @@
     "babel-preset-react": "^6.11.1",
     "babelify": "^7.3.0",
     "browserify": "^13.0.0",
+    "bundle-collapser": "^1.2.1",
+    "git-guppy": "^1.2.1",
     "gulp": "^3.9.1",
     "gulp-strip-debug": "^1.1.0",
     "gulp-uglify": "^1.5.4",
@@ -27,20 +29,15 @@
     "babel-polyfill": "^6.9.1",
     "hoist-non-react-statics": "^1.2.0",
     "isomorphic-fetch": "^2.2.1",
-    "localforage": "^1.4.2",
-    "material-ui": "^0.15.2",
     "react": "^15.2.1",
     "react-addons-update": "^15.2.1",
     "react-dom": "^15.2.1",
     "react-redux": "^4.4.5",
     "react-router": "^2.5.2",
-    "react-tap-event-plugin": "^1.0.0",
     "redux": "^3.5.2",
     "redux-api": "^0.9.8",
     "redux-api-middleware": "^1.0.2",
     "redux-thunk": "^2.1.0",
-    "webfontloader": "^1.6.26",
-    "wp-api-response-modify": "^2.0.0",
-    "wpapi": "^0.8.0"
+    "wp-api-response-modify": "^2.0.0"
   }
 }

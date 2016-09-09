@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
 import {connectCollection} from '../../api';
-import FlatButton from 'material-ui/FlatButton';
 
 class Categories extends Component {
     render() {
@@ -11,20 +10,20 @@ class Categories extends Component {
         } = this.props;
 
         return (
-            <div>
+            <ul>
                 {sync ? categories.map(({
                     name,
                     link
                 }) => (
-                    <FlatButton
-                        containerElement={<Link
+                    <li>
+                        <Link
                             to={link}
-                        />}
-                        linkButton={true}
-                        label={name}
-                    />
-                )) : 'Loading'}
-            </div>
+                        >{name}</Link>
+                    </li>
+                )) : (
+                    <li>Loading</li>
+                )}
+            </ul>
         );
     }
 }

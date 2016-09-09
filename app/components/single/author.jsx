@@ -1,33 +1,35 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
 import {connectEntity} from '../../api';
-import {CardHeader} from 'material-ui/Card';
 
-class Single extends Component {
+class Author extends Component {
     render() {
         let {
             data: author,
             sync
         } = this.props;
 
-        return (
-            <div>
-                {sync ? (
-                    <CardHeader
-                        title={author.name}
-                        subtitle={author.description}
-                        avatar={author.avatarUrls[48]}
+        return sync ? (
+            <header>
+                <img
+                    src={author.avatarUrls[48]}
+                    alt={author.name}
+                />
+                <h4>
+                    <Link
+                        to={author.link}
                     >
-                        <Link
-                            to={author.link}
-                        >
-                            {author.name}
-                        </Link>
-                    </CardHeader>
-                ) : 'Loading'}
-            </div>
+                        {author.name}
+                    </Link>
+                </h4>
+                <p>
+                    {author.description}
+                </p>
+            </header>
+        ) : (
+            <span>Loading</span>
         );
     }
 }
 
-export default connectEntity('users')(Single);
+export default connectEntity('users')(Author);

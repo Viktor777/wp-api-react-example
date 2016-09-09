@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import {connectEntity} from '../../api';
-import {List} from 'material-ui/List';
-import Subheader from 'material-ui/Subheader';
 import Posts from './posts';
 
 class Category extends Component {
@@ -11,19 +9,17 @@ class Category extends Component {
             sync
         } = this.props;
 
-        return (
+        return sync ? (
             <div>
-                {sync ? (
-                    <List>
-                        <Subheader>{category.name}</Subheader>
-                        <Posts
-                            params={{
-                                category: category.id
-                            }}
-                        />
-                    </List>
-                ) : 'Loading'}
+                <h1>{category.name}</h1>
+                <Posts
+                    params={{
+                        category: category.id
+                    }}
+                />
             </div>
+        ) : (
+            <span>Loading</span>
         );
     }
 }

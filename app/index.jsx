@@ -1,7 +1,6 @@
 import 'babel-polyfill';
 import React from 'react';
 import {render} from 'react-dom';
-import injectTapEventPlugin from 'react-tap-event-plugin';
 import {Provider} from 'react-redux';
 import configure from './storage/configure';
 import {Router, Route, browserHistory, IndexRoute} from 'react-router';
@@ -23,7 +22,6 @@ initialize({
     },
     users: '/wp-api-react-example/wp-json/wp/v2/users/:id'
 });
-injectTapEventPlugin();
 render((
     <Provider store={configure(initial)}>
         <Router history={browserHistory}>

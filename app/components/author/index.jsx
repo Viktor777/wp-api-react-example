@@ -1,8 +1,5 @@
 import React, {Component} from 'react';
 import {connectEntity} from '../../api';
-import {List} from 'material-ui/List';
-import Subheader from 'material-ui/Subheader';
-import Avatar from 'material-ui/Avatar';
 import Posts from './posts';
 
 class Author extends Component {
@@ -12,25 +9,26 @@ class Author extends Component {
             sync
         } = this.props;
 
-        return (
+        return sync ? (
             <div>
-                {sync ? (
-                    <List>
-                        <Subheader>
-                            <Avatar
-                                src={author.avatarUrls[96]}
-                                size={96}
-                            />
-                            {author.name}
-                        </Subheader>
-                        <Posts
-                            params={{
-                                author: author.id
-                            }}
-                        />
-                    </List>
-                ) : 'Loading'}
+                <header>
+                    <img
+                        src={author.avatarUrls[96]}
+                        alt={author.name}
+                    />
+                    <h4>{author.name}</h4>
+                    <p>
+                        {author.description}
+                    </p>
+                </header>
+                <Posts
+                    params={{
+                        author: author.id
+                    }}
+                />
             </div>
+        ) : (
+            <span>Loading</span>
         );
     }
 }

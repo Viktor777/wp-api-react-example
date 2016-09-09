@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {connectEntity} from '../../api';
-import {Card, CardActions, CardTitle, CardText} from 'material-ui/Card';
 import Categories from './categories';
 import Author from './author';
 
@@ -11,35 +10,29 @@ class Single extends Component {
             sync
         } = this.props;
 
-        return (
-            <div>
-                {sync ? (
-                    <Card>
-                        <Author
-                            params={{
-                                id: post.author
-                            }}
-                        />
-                        <CardTitle
-                            title={post.title}
-                        />
-                        <CardText
-                            dangerouslySetInnerHTML={{
-                                __html: post.content
-                            }}
-                        />
-                        {post.categories.length && (
-                            <CardActions>
-                                <Categories
-                                    params={{
-                                        categories: post.categories
-                                    }}
-                                />
-                            </CardActions>
-                        )}
-                    </Card>
-                ) : 'Loading'}
-            </div>
+        return sync ? (
+            <article>
+                <h1>{post.title}</h1>
+                <Author
+                    params={{
+                        id: post.author
+                    }}
+                />
+                <div
+                    dangerouslySetInnerHTML={{
+                        __html: post.content
+                    }}
+                />
+                {post.categories.length && (
+                    <Categories
+                        params={{
+                            categories: post.categories
+                        }}
+                    />
+                )}
+            </article>
+        ) : (
+            <span>Loading</span>
         );
     }
 }
