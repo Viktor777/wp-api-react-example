@@ -9,7 +9,6 @@
   "author": "Viktor Kuliebiakin <victor@pingbull.no>",
   "license": "ISC",
   "devDependencies": {
-    "babel-plugin-transform-export-extensions": "^6.8.0",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.11.1",
     "babelify": "^7.3.0",
@@ -27,17 +26,13 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.9.1",
-    "hoist-non-react-statics": "^1.2.0",
-    "isomorphic-fetch": "^2.2.1",
     "react": "^15.2.1",
     "react-addons-update": "^15.2.1",
     "react-dom": "^15.2.1",
     "react-redux": "^4.4.5",
+    "react-rest-press": "^1.0.4",
     "react-router": "^2.5.2",
     "redux": "^3.5.2",
-    "redux-api": "^0.9.8",
-    "redux-api-middleware": "^1.0.2",
-    "redux-thunk": "^2.1.0",
-    "wp-api-response-modify": "^2.0.0"
+    "redux-thunk": "^2.1.0"
   }
 }

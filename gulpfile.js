@@ -21,8 +21,7 @@ let bundle = env => {
         packageCache: {},
         plugin: dev ? [watchify] : [collapse]
     }).transform(babelify, {
-        presets: ['es2015', 'react'],
-        plugins: ['transform-export-extensions']
+        presets: ['es2015', 'react']
     });
     let rebundle;
 

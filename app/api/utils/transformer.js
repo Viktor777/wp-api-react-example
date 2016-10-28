@@ -1,1 +1,0 @@
-export default data => Array.isArray(data) && data.length === 1 ? data[0] : data;

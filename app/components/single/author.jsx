@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
-import {connectEntity} from '../../api';
+import {connectEntity} from 'react-rest-press';
 
 class Author extends Component {
     render() {

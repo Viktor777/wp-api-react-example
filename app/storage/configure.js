@@ -1,6 +1,6 @@
 import {createStore, applyMiddleware, combineReducers, compose} from 'redux';
 import thunk from 'redux-thunk';
-import {middleware, reducers} from '../api';
+import {middleware, reducers} from 'react-rest-press';
 
 export default initial => createStore(combineReducers(reducers()), initial, compose(
     applyMiddleware(thunk, middleware),

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {connectEntity} from '../../api';
+import {connectEntity} from 'react-rest-press';
 import Posts from './posts';
 
 class Category extends Component {

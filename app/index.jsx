@@ -10,7 +10,7 @@ import Category from './components/category';
 import Author from './components/author';
 import Single from './components/single';
 import NotFound from './components/not-found';
-import {initialize} from './api';
+import {initialize} from 'react-rest-press';
 
 let initial = {};
 

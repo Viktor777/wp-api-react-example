@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {connectEntity} from '../../api';
+import {connectEntity} from 'react-rest-press';
 import Categories from './categories';
 import Author from './author';
 
@@ -18,11 +18,13 @@ class Single extends Component {
                         id: post.author
                     }}
                 />
-                <div
-                    dangerouslySetInnerHTML={{
-                        __html: post.content
-                    }}
-                />
+                {!post.content.protected && (
+                    <div
+                        dangerouslySetInnerHTML={{
+                            __html: post.content.rendered
+                        }}
+                    />
+                )}
                 {post.categories.length ? (
                     <Categories
                         params={{
