@@ -11,25 +11,33 @@ import Author from './components/author';
 import Single from './components/single';
 import NotFound from './components/not-found';
 import {initialize} from 'react-rest-press';
+import settings from './settings';
 
 let initial = {};
+let {
+    path,
+    rest: {
+        url
+    }
+} = settings;
+let api = `${url}wp/v2`;
 
 initialize({
-    categories: '/wp-api-react-example/wp-json/wp/v2/categories/:id',
+    categories: `${api}/categories/:id`,
     posts: {
-        url: '/wp-api-react-example/wp-json/wp/v2/posts/:id',
+        url: `${api}/posts/:id`,
         expiration: 5 * 60 // 5 min - for test
     },
-    users: '/wp-api-react-example/wp-json/wp/v2/users/:id'
+    users: `${api}/users/:id`
 });
 render((
     <Provider store={configure(initial)}>
         <Router history={browserHistory}>
-            <Route path="/wp-api-react-example" component={Main}>
+            <Route path={`${path}/`} component={Main}>
                 <IndexRoute component={Home} />
-                <Route path="/wp-api-react-example/category/:slug(/)" component={Category} />
-                <Route path="/wp-api-react-example/author/:slug(/)" component={Author} />
-                <Route path="/wp-api-react-example/:year/:month/:day/:slug(/)" component={Single} />
+                <Route path={`${path}/category/:slug(/)`} component={Category} />
+                <Route path={`${path}/author/:slug(/)`} component={Author} />
+                <Route path={`${path}/:year/:month/:day/:slug(/)`} component={Single} />
                 <Route path="*" component={NotFound}/>
             </Route>
         </Router>
